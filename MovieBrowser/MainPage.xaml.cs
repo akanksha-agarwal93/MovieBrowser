@@ -16,7 +16,8 @@ namespace MovieBrowser
         public MainPage()
         {
             InitializeComponent();
-            BindingContext = this;
         }
+
+       
     }
 }

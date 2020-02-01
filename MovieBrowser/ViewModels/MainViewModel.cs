@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using MovieBrowser.IService.IServices;
 using MovieBrowser.Models;
 using Prism.Navigation;
 
@@ -7,20 +9,42 @@ namespace MovieBrowser.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
-        private ObservableCollection<MovieModel> _moviesList;
+        private IMovieService movieService;
+        private ObservableCollection<MovieObject> _moviesList;
 
-        public ObservableCollection<MovieModel> MoviesList
+        public ObservableCollection<MovieObject> MoviesList
         {
-            get => _moviesList;
+            get
+            {
+                return _moviesList;
+            }
             set
             {
                 SetProperty(ref _moviesList, value);
+                RaisePropertyChanged(nameof(MoviesList));
             }
         }
 
-        public MainViewModel(INavigationService navigationService) : base(navigationService)
+        public MainViewModel(INavigationService navigationService, IMovieService movieService) : base(navigationService)
         {
-            MoviesList = new ObservableCollection<MovieModel>() { new MovieModel(), new MovieModel() };
+            this.movieService = movieService;
+            MoviesList = new ObservableCollection<MovieObject>();
         }
+
+        public override async void OnNavigatedTo(INavigationParameters parameters)
+        {
+            base.OnNavigatedTo(parameters);
+            if (!IsBusy)
+            {
+                IsBusy = true;
+                var result = await movieService.GetListOfMovies(1);
+                if (result != null && result.results.Count > 0)
+                {
+                    MoviesList = new ObservableCollection<MovieObject>(result.results);
+                }
+            }
+            IsBusy = false;
+        }
+
     }
 }

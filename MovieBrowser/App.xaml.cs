@@ -4,6 +4,8 @@ using Xamarin.Forms.Xaml;
 using Prism.Unity;
 using Prism.Ioc;
 using MovieBrowser.ViewModels;
+using MovieBrowser.IService.IServices;
+using MovieBrowser.Services;
 
 //[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace MovieBrowser
@@ -33,6 +35,8 @@ namespace MovieBrowser
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainViewModel>();
+
+            containerRegistry.Register<IMovieService, MovieService>();
         }
 
         protected override async void OnInitialized()

@@ -22,8 +22,10 @@
                 <Button Text="Filter" WidthRequest="40" />
             </StackLayout>
             <ListView Grid.Row="1" x:Name="movieList"
-                    ItemsSource="{Binding MoviesList, Mode=TwoWay}" HasUnevenRows="False"
-                      RowHeight="100" BackgroundColor="Beige">
+                    ItemsSource="{Binding Path=MoviesList}" HasUnevenRows="False"
+                      RowHeight="100" BackgroundColor="Beige"
+                      IsRefreshing="{Binding IsBusy}"
+                      IsPullToRefreshEnabled="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                        <templates:MovieCell/>

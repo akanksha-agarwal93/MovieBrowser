@@ -30,17 +30,17 @@ namespace MovieBrowser.ViewModels
 
         public void Destroy()
         {
-            throw new NotImplementedException();
+           
         }
 
-        public void OnNavigatedFrom(INavigationParameters parameters)
+        public virtual void OnNavigatedFrom(INavigationParameters parameters)
         {
-            throw new NotImplementedException();
+         
         }
 
-        public void OnNavigatedTo(INavigationParameters parameters)
+        public virtual void OnNavigatedTo(INavigationParameters parameters)
         {
-            throw new NotImplementedException();
+            
         }
 
     }
