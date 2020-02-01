@@ -136,4 +136,8 @@
       <Name>MovieBrowser</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\filter_icon.png" />
+    <BundleResource Include="Resources\search_icon.png" />
+  </ItemGroup>
 </Project>

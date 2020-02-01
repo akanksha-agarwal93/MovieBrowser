@@ -3,6 +3,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Prism.Unity;
 using Prism.Ioc;
+using MovieBrowser.ViewModels;
 
 //[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace MovieBrowser
@@ -13,7 +14,7 @@ namespace MovieBrowser
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new MainPage());
         }
 
         protected override void OnStart()
@@ -31,6 +32,7 @@ namespace MovieBrowser
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
+            containerRegistry.RegisterForNavigation<MainPage, MainViewModel>();
         }
 
         protected override async void OnInitialized()

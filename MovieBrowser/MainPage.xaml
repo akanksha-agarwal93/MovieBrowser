@@ -1,7 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="MovieBrowser.MainPage">
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:templates="clr-namespace:MovieBrowser.Views;assembly=MovieBrowser"
+            xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+        mc:Ignorable="d" x:Class="MovieBrowser.MainPage" Title="Movies">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="MenuItem" Order="Primary" Icon="search_icon"
+                Text="Search" Priority="0" />
+    </ContentPage.ToolbarItems>
+    <StackLayout HorizontalOptions="CenterAndExpand"
+            VerticalOptions="StartAndExpand">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Row="0" HorizontalOptions="End">
+                <Button Text="Filter" WidthRequest="40" />
+            </StackLayout>
+            <ListView Grid.Row="1" x:Name="movieList"
+                    ItemsSource="{Binding MoviesList, Mode=TwoWay}" HasUnevenRows="False"
+                      RowHeight="100" BackgroundColor="Beige">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                       <templates:MovieCell/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
     </StackLayout>
 </ContentPage>
